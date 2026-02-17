@@ -25,50 +25,13 @@
         .nav-btn.active { background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.3); color: #60a5fa; }
         .mobile-nav-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px; color: #64748b; }
         .mobile-nav-btn.active { color: #60a5fa; }
-        /* Org Tree Styles */
-        .org-tree { position: relative; }
-        .org-node { position: relative; margin: 8px 0; }
-        .org-node-content {
-            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
-            background: rgba(255,255,255,0.05); border-radius: 8px;
-            border-left: 3px solid; cursor: pointer; transition: all 0.2s;
-        }
-        .org-node-content:hover { background: rgba(255,255,255,0.1); transform: translateX(4px); }
-        .org-node-content.executive { border-left-color: #a855f7; }
-        .org-node-content.business { border-left-color: #3b82f6; }
-        .org-node-content.department { border-left-color: #f59e0b; }
-        .org-node-content.specialist { border-left-color: #10b981; }
-        .org-node-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-        .org-node-icon.executive { background: rgba(168,85,247,0.2); color: #a855f7; }
-        .org-node-icon.business { background: rgba(59,130,246,0.2); color: #3b82f6; }
-        .org-node-icon.department { background: rgba(245,158,11,0.2); color: #f59e0b; }
-        .org-node-icon.specialist { background: rgba(16,185,129,0.2); color: #10b981; }
-        .org-node-info { flex: 1; }
-        .org-node-name { font-weight: 500; color: white; font-size: 14px; }
-        .org-node-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
-        .org-node-status { width: 8px; height: 8px; border-radius: 50%; }
-        .org-node-status.online { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
-        .org-node-status.busy { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
-        .org-node-status.offline { background: #64748b; }
-        .org-children { margin-left: 24px; padding-left: 16px; border-left: 1px dashed rgba(255,255,255,0.1); }
-        .org-expand-btn { width: 20px; height: 20px; border-radius: 4px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 10px; color: #94a3b8; cursor: pointer; transition: all 0.2s; }
-        .org-expand-btn:hover { background: rgba(255,255,255,0.2); }
-        .org-expand-btn.collapsed { transform: rotate(-90deg); }
-        /* Agent Details Panel */
-        .agent-detail-card { animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .agent-detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .agent-detail-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        .agent-detail-icon.executive { background: rgba(168,85,247,0.2); color: #a855f7; }
-        .agent-detail-icon.business { background: rgba(59,130,246,0.2); color: #3b82f6; }
-        .agent-detail-icon.department { background: rgba(245,158,11,0.2); color: #f59e0b; }
-        .agent-detail-icon.specialist { background: rgba(16,185,129,0.2); color: #10b981; }
-        .agent-detail-title { font-size: 18px; font-weight: 600; color: white; }
-        .agent-detail-subtitle { font-size: 12px; color: #64748b; margin-top: 2px; }
-        .agent-detail-section { margin-bottom: 16px; }
-        .agent-detail-label { font-size: 11px; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; margin-bottom: 6px; }
-        .agent-detail-value { font-size: 14px; color: #e2e8f0; }
-        .agent-capability-tag { display: inline-block; padding: 4px 10px; background: rgba(255,255,255,0.1); border-radius: 9999px; font-size: 12px; color: #94a3b8; margin: 2px; }
+        .agent-card { border-left: 3px solid; padding: 12px; margin-bottom: 8px; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.2s; }
+        .agent-card:hover { background: rgba(255,255,255,0.08); transform: translateX(4px); }
+        .agent-card.executive { border-left-color: #a855f7; }
+        .agent-card.business { border-left-color: #3b82f6; }
+        .agent-card.department { border-left-color: #f59e0b; }
+        .agent-card.specialist { border-left-color: #10b981; }
+        .subtask-card { padding: 12px; margin: 8px 0; background: rgba(59,130,246,0.1); border-radius: 8px; border: 1px solid rgba(59,130,246,0.3); }
     </style>
 </head>
 <body>
@@ -90,9 +53,7 @@
             <button class="nav-btn" data-nav="settings"><i class="fas fa-cog w-5"></i>Settings</button>
         </nav>
         <div class="absolute bottom-4 left-4 right-4 p-3 rounded-lg bg-white/5 border border-white/10">
-            <div class="flex items-center gap-2 text-xs text-green-400">
-                <i class="fas fa-circle text-[8px]"></i><span>Connected</span>
-            </div>
+            <div class="flex items-center gap-2 text-xs text-green-400"><i class="fas fa-circle text-[8px]"></i><span>Connected</span></div>
         </div>
     </aside>
     <nav class="bottom-nav justify-around">
@@ -104,225 +65,232 @@
     </nav>
     <header class="desktop-header glass-card fixed top-0 right-0 left-64 h-16 z-40 flex items-center justify-between px-6">
         <span class="text-green-400 text-sm"><i class="fas fa-circle text-xs mr-2"></i>Claude AI Active</span>
-        <button onclick="alert('Halt clicked')" class="px-3 py-2 bg-red-500/10 text-red-400 border border-red-500/30 rounded-lg text-sm"><i class="fas fa-power-off mr-2"></i>Halt</button>
+        <button onclick="alert('System halted')" class="px-3 py-2 bg-red-500/10 text-red-400 border border-red-500/30 rounded-lg text-sm"><i class="fas fa-power-off mr-2"></i>Halt</button>
     </header>
     <main class="main-content ml-64 pt-20 px-4 min-h-screen pb-20">
+        
+        <!-- Dashboard -->
         <div id="page-dashboard" class="page active">
             <h1 class="text-2xl font-bold text-white mb-6">Dashboard</h1>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <div class="glass-card p-4"><p class="text-sm text-slate-400">System</p><p class="text-xl font-bold text-green-400">Online</p></div>
                 <div class="glass-card p-4"><p class="text-sm text-slate-400">Agents</p><p class="text-xl font-bold text-blue-400">20</p></div>
-                <div class="glass-card p-4"><p class="text-sm text-slate-400">Skills</p><p class="text-xl font-bold text-emerald-400">10</p></div>
-                <div class="glass-card p-4"><p class="text-sm text-slate-400">Rules</p><p class="text-xl font-bold text-amber-400">7</p></div>
+                <div class="glass-card p-4"><p class="text-sm text-slate-400">Skills</p><p class="text-xl font-bold text-emerald-400">103</p></div>
+                <div class="glass-card p-4"><p class="text-sm text-slate-400">Active Tasks</p><p class="text-xl font-bold text-amber-400">0</p></div>
             </div>
-            <div class="glass-card">
-                <div class="p-4 border-b border-white/5"><h2 class="text-lg font-semibold text-white">Organization Overview</h2></div>
-                <div class="p-4"><p class="text-slate-400 mb-4">20 agents across 4 hierarchy levels</p>
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 text-center">
-                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-2xl font-bold text-white">1</p><p class="text-xs text-slate-500">Executive</p></div>
-                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-2xl font-bold text-white">7</p><p class="text-xs text-slate-500">Business</p></div>
-                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-2xl font-bold text-white">4</p><p class="text-xs text-slate-500">Departments</p></div>
-                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-2xl font-bold text-white">8</p><p class="text-xs text-slate-500">Specialists</p></div>
-                </div></div>
+            <div class="glass-card p-4">
+                <h2 class="text-lg font-semibold text-white mb-4">Multi-Agent Orchestration</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="p-3 bg-white/5 rounded-lg">
+                        <p class="text-blue-400 font-medium mb-1">1. Intent Analysis</p>
+                        <p class="text-slate-400">Chief of Staff analyzes requirements</p>
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-lg">
+                        <p class="text-blue-400 font-medium mb-1">2. Skill Matching</p>
+                        <p class="text-slate-400">Matches against 103 curated skills</p>
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-lg">
+                        <p class="text-blue-400 font-medium mb-1">3. Multi-Agent Dispatch</p>
+                        <p class="text-slate-400">Distributes sub-tasks to specialists</p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- Organization -->
         <div id="page-org" class="page">
             <h1 class="text-2xl font-bold text-white mb-6">Organization</h1>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Org Tree -->
-                <div class="lg:col-span-2 glass-card p-6">
-                    <h2 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-                        <i class="fas fa-sitemap text-blue-400"></i>Agent Hierarchy
-                    </h2>
-                    <div id="org-tree" class="space-y-4">
-                        <!-- Tree will be rendered by JS -->
+            <div class="space-y-4" id="org-container">
+                <!-- Executive -->
+                <div class="glass-card p-4">
+                    <h3 class="text-purple-400 text-sm uppercase tracking-wider mb-3">Executive</h3>
+                    <div class="agent-card executive">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-crown text-purple-400"></i>
+                                <div>
+                                    <p class="text-white font-medium">Chief of Staff</p>
+                                    <p class="text-xs text-slate-400">ID: 0001 • Planning, Coordination, Strategy</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-green-400">● Online</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Agent Details Panel -->
-                <div class="glass-card p-6">
-                    <h2 class="text-lg font-semibold text-white mb-4">Agent Details</h2>
-                    <div id="agent-details" class="text-slate-400 text-center py-8">
-                        <i class="fas fa-user-circle text-5xl mb-3 opacity-30"></i>
-                        <p>Hover over an agent to view details</p>
+                <!-- Business Managers -->
+                <div class="glass-card p-4">
+                    <h3 class="text-blue-400 text-sm uppercase tracking-wider mb-3">Business Managers (7)</h3>
+                    <div class="space-y-2">
+                        <div class="agent-card business"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-building text-blue-400"></i><div><p class="text-white font-medium">TDS Enterprise</p><p class="text-xs text-slate-400">ID: 0002-1 • Pricing, Strategy, Analysis</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card business"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-building text-blue-400"></i><div><p class="text-white font-medium">Featured Apps</p><p class="text-xs text-slate-400">ID: 0002-2 • MCP, Postgres, API Design</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card business"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-building text-blue-400"></i><div><p class="text-white font-medium">Elite Solutions</p><p class="text-xs text-slate-400">ID: 0002-3 • Analysis, Positioning</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card business"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-building text-blue-400"></i><div><p class="text-white font-medium">Jumpstart CACFP</p><p class="text-xs text-slate-400">ID: 0002-4 • Marketing, Content</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card business"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-building text-blue-400"></i><div><p class="text-white font-medium">Client Services</p><p class="text-xs text-slate-400">ID: 0002-5 • Node.js, Backend, Testing</p></div></div><span class="text-xs text-amber-400">● Busy</span></div></div>
+                        <div class="agent-card business"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-building text-blue-400"></i><div><p class="text-white font-medium">Licensing</p><p class="text-xs text-slate-400">ID: 0002-6 • Stripe, Billing, Auth</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card business"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-building text-blue-400"></i><div><p class="text-white font-medium">Education Tech</p><p class="text-xs text-slate-400">ID: 0002-7 • Compliance, Accessibility</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                    </div>
+                </div>
+                <!-- Departments -->
+                <div class="glass-card p-4">
+                    <h3 class="text-amber-400 text-sm uppercase tracking-wider mb-3">Departments (4)</h3>
+                    <div class="space-y-2">
+                        <div class="agent-card department"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-sitemap text-amber-400"></i><div><p class="text-white font-medium">Growth Dept</p><p class="text-xs text-slate-400">ID: 0003-1 • SEO, Copywriting | 3 specialists</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card department"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-sitemap text-amber-400"></i><div><p class="text-white font-medium">Product Dept</p><p class="text-xs text-slate-400">ID: 0003-2 • Debugging, Review | 3 specialists</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card department"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-sitemap text-amber-400"></i><div><p class="text-white font-medium">Operations</p><p class="text-xs text-slate-400">ID: 0003-3 • Deploy, Monitoring | 1 specialist</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card department"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-sitemap text-amber-400"></i><div><p class="text-white font-medium">Legal/Finance</p><p class="text-xs text-slate-400">ID: 0003-4 • Compliance, PCI | 1 specialist</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                    </div>
+                </div>
+                <!-- Specialists -->
+                <div class="glass-card p-4">
+                    <h3 class="text-emerald-400 text-sm uppercase tracking-wider mb-3">Specialists (8)</h3>
+                    <div class="space-y-2">
+                        <div class="agent-card specialist"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-user text-emerald-400"></i><div><p class="text-white font-medium">Continuous Cognition</p><p class="text-xs text-slate-400">ID: 0004-1 • Planning, Analysis</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card specialist"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-user text-emerald-400"></i><div><p class="text-white font-medium">macOS Engineer</p><p class="text-xs text-slate-400">ID: 0004-2 • Swift, Xcode</p></div></div><span class="text-xs text-amber-400">● Busy</span></div></div>
+                        <div class="agent-card specialist"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-user text-emerald-400"></i><div><p class="text-white font-medium">Web Engineer</p><p class="text-xs text-slate-400">ID: 0004-3 • Frontend, Backend</p></div></div><span class="text-xs text-amber-400">● Busy</span></div></div>
+                        <div class="agent-card specialist"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-user text-emerald-400"></i><div><p class="text-white font-medium">QA/Test Runner</p><p class="text-xs text-slate-400">ID: 0004-4 • Testing, Automation</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card specialist"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-user text-emerald-400"></i><div><p class="text-white font-medium">Proposal Writer</p><p class="text-xs text-slate-400">ID: 0004-5 • Writing, Editing</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card specialist"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-user text-emerald-400"></i><div><p class="text-white font-medium">Lead Research</p><p class="text-xs text-slate-400">ID: 0004-6 • Research, Analysis</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card specialist"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-user text-emerald-400"></i><div><p class="text-white font-medium">Compliance Analyzer</p><p class="text-xs text-slate-400">ID: 0004-7 • GDPR, Security</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
+                        <div class="agent-card specialist"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><i class="fas fa-user text-emerald-400"></i><div><p class="text-white font-medium">Brand Messaging</p><p class="text-xs text-slate-400">ID: 0004-8 • Branding, Design</p></div></div><span class="text-xs text-green-400">● Online</span></div></div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Intent with Multi-Agent Routing -->
         <div id="page-intent" class="page">
             <h1 class="text-2xl font-bold text-white mb-6">Submit Task</h1>
-            <div class="glass-card p-6 max-w-xl">
-                <textarea class="w-full h-32 bg-white/5 border border-white/10 rounded-lg p-3 text-white mb-4" placeholder="What do you want to build?"></textarea>
-                <button class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-medium">Submit to Claude AI</button>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                    <div class="glass-card p-6 mb-4">
+                        <textarea id="task-input" class="w-full h-32 bg-white/5 border border-white/10 rounded-lg p-3 text-white mb-4" placeholder="Describe what you want to build..."></textarea>
+                        <button onclick="analyzeAndRoute()" class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-medium">
+                            <i class="fas fa-brain mr-2"></i>Analyze & Route
+                        </button>
+                    </div>
+                    <div id="routing-preview" class="hidden glass-card p-4">
+                        <h3 class="text-white font-medium mb-3">Routing Analysis</h3>
+                        <div id="routing-content"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="glass-card p-6">
+                        <h3 class="text-white font-medium mb-4">Multi-Agent Plan</h3>
+                        <div id="execution-plan" class="space-y-3">
+                            <p class="text-slate-400 text-center py-4">Submit a task to see execution plan</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- Execution -->
         <div id="page-execution" class="page">
             <h1 class="text-2xl font-bold text-white mb-6">Execution</h1>
-            <div class="glass-card p-4"><p class="text-slate-400">Task execution monitoring page.</p></div>
+            <div class="glass-card p-8 text-center text-slate-400">
+                <i class="fas fa-tasks text-4xl mb-3 opacity-50"></i>
+                <p>No active tasks</p>
+            </div>
         </div>
+
+        <!-- Settings -->
         <div id="page-settings" class="page">
             <h1 class="text-2xl font-bold text-white mb-6">Settings</h1>
-            <div class="glass-card p-4">
-                <h3 class="text-white font-medium mb-3">10 Skills Catalogued</h3>
-                <div class="grid grid-cols-2 gap-2 text-sm text-slate-400">
-                    <div>OpenAPI Spec, Node.js, Stripe, SEO, Copywriting</div>
-                    <div>Deployment, GitHub Actions, Architecture, Testing, Marketing</div>
+            <div class="glass-card p-6">
+                <h3 class="text-white font-medium mb-4">103 Skills (6 Tiers)</h3>
+                <div class="space-y-3 text-sm">
+                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-blue-400 font-medium">Tier 1: Core Engineering (10)</p><p class="text-slate-400">SwiftUI, React, Next.js, Testing, TDD, Debugging</p></div>
+                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-blue-400 font-medium">Tier 2: Licensing & Payments (4)</p><p class="text-slate-400">Stripe, Billing, Auth, PCI Compliance</p></div>
+                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-blue-400 font-medium">Tier 3: Lead Gen & Growth (6)</p><p class="text-slate-400">SEO, Copywriting, Marketing, Content Strategy</p></div>
+                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-blue-400 font-medium">Tier 4: Workflow & Ops (4)</p><p class="text-slate-400">Brainstorming, Planning, Execution, Verification</p></div>
+                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-blue-400 font-medium">Tier 5: Documents (6)</p><p class="text-slate-400">PDF, PPTX, DOCX, Dashboards, Storytelling</p></div>
+                    <div class="p-3 bg-white/5 rounded-lg"><p class="text-blue-400 font-medium">Plus 73 Additional Specialized Skills</p></div>
                 </div>
             </div>
         </div>
     </main>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('[data-nav]').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            var page = this.getAttribute('data-nav');
-            navigate(page);
-        });
+// Navigation
+document.querySelectorAll('[data-nav]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var page = this.getAttribute('data-nav');
+        document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+        document.getElementById('page-' + page).classList.add('active');
+        document.querySelectorAll('.nav-btn, .mobile-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('[data-nav="' + page + '"]').forEach(function(b) { b.classList.add('active'); });
     });
 });
-function navigate(page) {
-    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-    var target = document.getElementById('page-' + page);
-    if (target) target.classList.add('active');
-    document.querySelectorAll('.nav-btn').forEach(function(btn) {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-nav') === page) btn.classList.add('active');
+
+// Multi-Agent Routing
+function analyzeAndRoute() {
+    var intent = document.getElementById('task-input').value.trim();
+    if (!intent) return;
+    
+    var lower = intent.toLowerCase();
+    var agents = [];
+    var subtasks = [];
+    
+    // Always include Chief of Staff
+    agents.push({name: 'Chief of Staff', role: 'Planning & Coordination'});
+    subtasks.push({agent: 'Chief of Staff', task: 'Analyze intent and create execution plan', duration: '10 min'});
+    
+    // Route based on keywords
+    if (lower.includes('stripe') || lower.includes('payment')) {
+        agents.push({name: 'Licensing', role: 'Payment Integration'});
+        agents.push({name: 'Legal/Finance', role: 'Compliance'});
+        subtasks.push({agent: 'Licensing', task: 'Integrate Stripe payment processing', duration: '45 min'});
+        subtasks.push({agent: 'Legal/Finance', task: 'Verify PCI compliance', duration: '20 min'});
+    }
+    
+    if (lower.includes('web') || lower.includes('app') || lower.includes('site')) {
+        agents.push({name: 'Client Services', role: 'Backend Development'});
+        agents.push({name: 'Web Engineer', role: 'Frontend Development'});
+        agents.push({name: 'Product Dept', role: 'Architecture'});
+        subtasks.push({agent: 'Product Dept', task: 'Design system architecture', duration: '30 min'});
+        subtasks.push({agent: 'Web Engineer', task: 'Build frontend components', duration: '2 hrs'});
+        subtasks.push({agent: 'Client Services', task: 'Develop backend APIs', duration: '2 hrs'});
+    }
+    
+    if (lower.includes('test') || lower.includes('qa')) {
+        agents.push({name: 'QA/Test Runner', role: 'Testing'});
+        subtasks.push({agent: 'QA/Test Runner', task: 'Test functionality and edge cases', duration: '1 hr'});
+    }
+    
+    if (lower.includes('ios') || lower.includes('mac') || lower.includes('swift')) {
+        agents.push({name: 'macOS Engineer', role: 'iOS Development'});
+        subtasks.push({agent: 'macOS Engineer', task: 'Build iOS/macOS components', duration: '2 hrs'});
+    }
+    
+    if (lower.includes('seo') || lower.includes('marketing') || lower.includes('copy')) {
+        agents.push({name: 'Jumpstart CACFP', role: 'Marketing Strategy'});
+        agents.push({name: 'Growth Dept', role: 'SEO & Content'});
+        agents.push({name: 'Lead Research', role: 'Research & Analysis'});
+        subtasks.push({agent: 'Lead Research', task: 'Research keywords and competitors', duration: '30 min'});
+        subtasks.push({agent: 'Growth Dept', task: 'Optimize SEO and content', duration: '1 hr'});
+    }
+    
+    // Always include deployment and final verification
+    agents.push({name: 'Operations', role: 'Deployment'});
+    agents.push({name: 'Chief of Staff', role: 'Final Verification'});
+    subtasks.push({agent: 'Operations', task: 'Deploy to production', duration: '20 min'});
+    subtasks.push({agent: 'Chief of Staff', task: 'Verify completion and integrate results', duration: '10 min'});
+    
+    // Show routing preview
+    document.getElementById('routing-preview').classList.remove('hidden');
+    var routingHtml = '<p class="text-slate-400 mb-2">Assigned Agents:</p>';
+    agents.forEach(function(a) {
+        routingHtml += '<div class="flex items-center gap-2 mb-1"><i class="fas fa-robot text-blue-400"></i><span class="text-white">' + a.name + '</span><span class="text-slate-500 text-sm">- ' + a.role + '</span></div>';
     });
-    document.querySelectorAll('.mobile-nav-btn').forEach(function(btn) {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-nav') === page) btn.classList.add('active');
+    document.getElementById('routing-content').innerHTML = routingHtml;
+    
+    // Show execution plan
+    var planHtml = '';
+    subtasks.forEach(function(st, i) {
+        planHtml += '<div class="subtask-card"><div class="flex justify-between items-start"><div><p class="text-white font-medium">' + (i+1) + '. ' + st.agent + '</p><p class="text-slate-400 text-sm">' + st.task + '</p></div><span class="text-xs text-blue-400">' + st.duration + '</span></div></div>';
     });
-    if (page === 'org') renderOrgTree();
-}
-
-// Organization Tree Data
-var orgData = {
-    id: '0001', name: 'Chief of Staff', type: 'executive', status: 'online',
-    capabilities: ['Planning', 'Coordination', 'Strategy'],
-    reportsTo: null, children: [
-        { id: '0002-1', name: 'TDS Enterprise', type: 'business', status: 'online', capabilities: ['Pricing', 'Strategy', 'Analysis'], reportsTo: 'Chief of Staff' },
-        { id: '0002-2', name: 'Featured Apps', type: 'business', status: 'online', capabilities: ['MCP', 'Postgres', 'API Design'], reportsTo: 'Chief of Staff' },
-        { id: '0002-3', name: 'Elite Solutions', type: 'business', status: 'online', capabilities: ['Analysis', 'Positioning', 'Market Research'], reportsTo: 'Chief of Staff' },
-        { id: '0002-4', name: 'Jumpstart CACFP', type: 'business', status: 'online', capabilities: ['Marketing', 'Content', 'Social Media'], reportsTo: 'Chief of Staff' },
-        { id: '0002-5', name: 'Client Services', type: 'business', status: 'busy', capabilities: ['Node.js', 'Backend', 'Testing'], reportsTo: 'Chief of Staff' },
-        { id: '0002-6', name: 'Licensing', type: 'business', status: 'online', capabilities: ['Stripe', 'Billing', 'Auth'], reportsTo: 'Chief of Staff' },
-        { id: '0002-7', name: 'Education Tech', type: 'business', status: 'online', capabilities: ['Compliance', 'Accessibility', 'WCAG'], reportsTo: 'Chief of Staff' },
-        { id: '0003-1', name: 'Growth Dept', type: 'department', status: 'online', capabilities: ['SEO', 'Copywriting', 'Growth Marketing'], reportsTo: 'Chief of Staff', children: [
-            { id: '0004-5', name: 'Proposal Writer', type: 'specialist', status: 'online', capabilities: ['Writing', 'Editing', 'Proposals'], reportsTo: 'Growth Dept' },
-            { id: '0004-6', name: 'Lead Research', type: 'specialist', status: 'online', capabilities: ['Research', 'Analysis', 'Lead Gen'], reportsTo: 'Growth Dept' },
-            { id: '0004-8', name: 'Brand Messaging', type: 'specialist', status: 'online', capabilities: ['Branding', 'Design', 'Messaging'], reportsTo: 'Growth Dept' }
-        ]},
-        { id: '0003-2', name: 'Product Dept', type: 'department', status: 'online', capabilities: ['Debugging', 'Code Review', 'Architecture'], reportsTo: 'Chief of Staff', children: [
-            { id: '0004-1', name: 'Continuous Cognition', type: 'specialist', status: 'online', capabilities: ['Planning', 'Analysis', 'Strategy'], reportsTo: 'Product Dept' },
-            { id: '0004-2', name: 'macOS Engineer', type: 'specialist', status: 'busy', capabilities: ['Swift', 'Xcode', 'macOS'], reportsTo: 'Product Dept' },
-            { id: '0004-3', name: 'Web Engineer', type: 'specialist', status: 'busy', capabilities: ['Frontend', 'Backend', 'Full Stack'], reportsTo: 'Product Dept' }
-        ]},
-        { id: '0003-3', name: 'Operations', type: 'department', status: 'online', capabilities: ['Deploy', 'Monitoring', 'DevOps'], reportsTo: 'Chief of Staff', children: [
-            { id: '0004-4', name: 'QA/Test Runner', type: 'specialist', status: 'online', capabilities: ['Testing', 'Automation', 'QA'], reportsTo: 'Operations' }
-        ]},
-        { id: '0003-4', name: 'Legal/Finance', type: 'department', status: 'online', capabilities: ['Compliance', 'PCI', 'Security'], reportsTo: 'Chief of Staff', children: [
-            { id: '0004-7', name: 'Compliance Analyzer', type: 'specialist', status: 'online', capabilities: ['GDPR', 'Security', 'Compliance'], reportsTo: 'Legal/Finance' }
-        ]}
-    ]
-};
-
-function renderOrgTree() {
-    var container = document.getElementById('org-tree');
-    if (!container || container.hasChildNodes()) return;
-    container.innerHTML = renderNode(orgData, 0);
-}
-
-function renderNode(node, level) {
-    var hasChildren = node.children && node.children.length > 0;
-    var iconClass = node.type === 'executive' ? 'fa-crown' : node.type === 'business' ? 'fa-building' : node.type === 'department' ? 'fa-sitemap' : 'fa-user';
-    var html = '<div class="org-node" style="margin-left:' + (level * 20) + 'px">';
-    html += '<div class="org-node-content ' + node.type + '" onclick="showAgentDetails(\'' + node.id + '\')" onmouseenter="previewAgentDetails(\'' + node.id + '\')">';
-    if (hasChildren) {
-        html += '<div class="org-expand-btn" onclick="toggleNode(event, this)"><i class="fas fa-chevron-down"></i></div>';
-    } else {
-        html += '<div style="width:20px;"></div>';
-    }
-    html += '<div class="org-node-icon ' + node.type + '"><i class="fas ' + iconClass + '"></i></div>';
-    html += '<div class="org-node-info">';
-    html += '<div class="org-node-name">' + node.name + '</div>';
-    html += '<div class="org-node-meta">' + node.id + ' • ' + node.capabilities.slice(0, 2).join(', ') + (node.capabilities.length > 2 ? ' +' + (node.capabilities.length - 2) : '') + '</div>';
-    html += '</div>';
-    html += '<div class="org-node-status ' + node.status + '"></div>';
-    html += '</div>';
-    if (hasChildren) {
-        html += '<div class="org-children">';
-        node.children.forEach(function(child) {
-            html += renderNode(child, level + 1);
-        });
-        html += '</div>';
-    }
-    html += '</div>';
-    return html;
-}
-
-function toggleNode(event, btn) {
-    event.stopPropagation();
-    var children = btn.closest('.org-node').querySelector('.org-children');
-    if (children) {
-        children.style.display = children.style.display === 'none' ? 'block' : 'none';
-        btn.classList.toggle('collapsed');
-    }
-}
-
-function findAgent(id, node) {
-    if (!node) node = orgData;
-    if (node.id === id) return node;
-    if (node.children) {
-        for (var i = 0; i < node.children.length; i++) {
-            var found = findAgent(id, node.children[i]);
-            if (found) return found;
-        }
-    }
-    return null;
-}
-
-function previewAgentDetails(id) {
-    showAgentDetails(id, true);
-}
-
-function showAgentDetails(id, isPreview) {
-    var agent = findAgent(id);
-    if (!agent) return;
-    var container = document.getElementById('agent-details');
-    var iconClass = agent.type === 'executive' ? 'fa-crown' : agent.type === 'business' ? 'fa-building' : agent.type === 'department' ? 'fa-sitemap' : 'fa-user';
-    var statusColor = agent.status === 'online' ? '#22c55e' : agent.status === 'busy' ? '#f59e0b' : '#64748b';
-    var html = '<div class="agent-detail-card">';
-    html += '<div class="agent-detail-header">';
-    html += '<div class="agent-detail-icon ' + agent.type + '"><i class="fas ' + iconClass + '"></i></div>';
-    html += '<div>';
-    html += '<div class="agent-detail-title">' + agent.name + '</div>';
-    html += '<div class="agent-detail-subtitle">' + agent.id + ' • ' + agent.type.charAt(0).toUpperCase() + agent.type.slice(1) + '</div>';
-    html += '</div>';
-    html += '</div>';
-    html += '<div class="agent-detail-section">';
-    html += '<div class="agent-detail-label">Status</div>';
-    html += '<div class="agent-detail-value" style="color:' + statusColor + '"><i class="fas fa-circle text-xs mr-2"></i>' + agent.status.charAt(0).toUpperCase() + agent.status.slice(1) + '</div>';
-    html += '</div>';
-    html += '<div class="agent-detail-section">';
-    html += '<div class="agent-detail-label">Reports To</div>';
-    html += '<div class="agent-detail-value">' + (agent.reportsTo || 'N/A (Top Level)') + '</div>';
-    html += '</div>';
-    html += '<div class="agent-detail-section">';
-    html += '<div class="agent-detail-label">Capabilities</div>';
-    html += '<div style="margin-top:8px;">';
-    agent.capabilities.forEach(function(cap) {
-        html += '<span class="agent-capability-tag">' + cap + '</span>';
-    });
-    html += '</div>';
-    html += '</div>';
-    if (agent.children && agent.children.length > 0) {
-        html += '<div class="agent-detail-section">';
-        html += '<div class="agent-detail-label">Direct Reports (' + agent.children.length + ')</div>';
-        html += '<div class="agent-detail-value">' + agent.children.map(function(c) { return c.name; }).join(', ') + '</div>';
-        html += '</div>';
-    }
-    html += '</div>';
-    container.innerHTML = html;
+    document.getElementById('execution-plan').innerHTML = planHtml;
 }
 </script>
 </body>
