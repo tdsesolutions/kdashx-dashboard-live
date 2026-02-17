@@ -25,6 +25,50 @@
         .nav-btn.active { background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.3); color: #60a5fa; }
         .mobile-nav-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px; color: #64748b; }
         .mobile-nav-btn.active { color: #60a5fa; }
+        /* Org Tree Styles */
+        .org-tree { position: relative; }
+        .org-node { position: relative; margin: 8px 0; }
+        .org-node-content {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            background: rgba(255,255,255,0.05); border-radius: 8px;
+            border-left: 3px solid; cursor: pointer; transition: all 0.2s;
+        }
+        .org-node-content:hover { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .org-node-content.executive { border-left-color: #a855f7; }
+        .org-node-content.business { border-left-color: #3b82f6; }
+        .org-node-content.department { border-left-color: #f59e0b; }
+        .org-node-content.specialist { border-left-color: #10b981; }
+        .org-node-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .org-node-icon.executive { background: rgba(168,85,247,0.2); color: #a855f7; }
+        .org-node-icon.business { background: rgba(59,130,246,0.2); color: #3b82f6; }
+        .org-node-icon.department { background: rgba(245,158,11,0.2); color: #f59e0b; }
+        .org-node-icon.specialist { background: rgba(16,185,129,0.2); color: #10b981; }
+        .org-node-info { flex: 1; }
+        .org-node-name { font-weight: 500; color: white; font-size: 14px; }
+        .org-node-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
+        .org-node-status { width: 8px; height: 8px; border-radius: 50%; }
+        .org-node-status.online { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+        .org-node-status.busy { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+        .org-node-status.offline { background: #64748b; }
+        .org-children { margin-left: 24px; padding-left: 16px; border-left: 1px dashed rgba(255,255,255,0.1); }
+        .org-expand-btn { width: 20px; height: 20px; border-radius: 4px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 10px; color: #94a3b8; cursor: pointer; transition: all 0.2s; }
+        .org-expand-btn:hover { background: rgba(255,255,255,0.2); }
+        .org-expand-btn.collapsed { transform: rotate(-90deg); }
+        /* Agent Details Panel */
+        .agent-detail-card { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .agent-detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .agent-detail-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .agent-detail-icon.executive { background: rgba(168,85,247,0.2); color: #a855f7; }
+        .agent-detail-icon.business { background: rgba(59,130,246,0.2); color: #3b82f6; }
+        .agent-detail-icon.department { background: rgba(245,158,11,0.2); color: #f59e0b; }
+        .agent-detail-icon.specialist { background: rgba(16,185,129,0.2); color: #10b981; }
+        .agent-detail-title { font-size: 18px; font-weight: 600; color: white; }
+        .agent-detail-subtitle { font-size: 12px; color: #64748b; margin-top: 2px; }
+        .agent-detail-section { margin-bottom: 16px; }
+        .agent-detail-label { font-size: 11px; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .agent-detail-value { font-size: 14px; color: #e2e8f0; }
+        .agent-capability-tag { display: inline-block; padding: 4px 10px; background: rgba(255,255,255,0.1); border-radius: 9999px; font-size: 12px; color: #94a3b8; margin: 2px; }
     </style>
 </head>
 <body>
@@ -84,14 +128,24 @@
         </div>
         <div id="page-org" class="page">
             <h1 class="text-2xl font-bold text-white mb-6">Organization</h1>
-            <div class="glass-card p-4">
-                <p class="text-slate-400 mb-4">20 agents across 4 hierarchy levels:</p>
-                <ul class="space-y-2 text-slate-300">
-                    <li><i class="fas fa-crown text-purple-400 mr-2"></i>Chief of Staff (Executive)</li>
-                    <li><i class="fas fa-building text-blue-400 mr-2"></i>7 Business Managers</li>
-                    <li><i class="fas fa-sitemap text-amber-400 mr-2"></i>4 Departments</li>
-                    <li><i class="fas fa-user text-emerald-400 mr-2"></i>8 Specialists</li>
-                </ul>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Org Tree -->
+                <div class="lg:col-span-2 glass-card p-6">
+                    <h2 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                        <i class="fas fa-sitemap text-blue-400"></i>Agent Hierarchy
+                    </h2>
+                    <div id="org-tree" class="space-y-4">
+                        <!-- Tree will be rendered by JS -->
+                    </div>
+                </div>
+                <!-- Agent Details Panel -->
+                <div class="glass-card p-6">
+                    <h2 class="text-lg font-semibold text-white mb-4">Agent Details</h2>
+                    <div id="agent-details" class="text-slate-400 text-center py-8">
+                        <i class="fas fa-user-circle text-5xl mb-3 opacity-30"></i>
+                        <p>Hover over an agent to view details</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="page-intent" class="page">
@@ -138,6 +192,137 @@ function navigate(page) {
         btn.classList.remove('active');
         if (btn.getAttribute('data-nav') === page) btn.classList.add('active');
     });
+    if (page === 'org') renderOrgTree();
+}
+
+// Organization Tree Data
+var orgData = {
+    id: '0001', name: 'Chief of Staff', type: 'executive', status: 'online',
+    capabilities: ['Planning', 'Coordination', 'Strategy'],
+    reportsTo: null, children: [
+        { id: '0002-1', name: 'TDS Enterprise', type: 'business', status: 'online', capabilities: ['Pricing', 'Strategy', 'Analysis'], reportsTo: 'Chief of Staff' },
+        { id: '0002-2', name: 'Featured Apps', type: 'business', status: 'online', capabilities: ['MCP', 'Postgres', 'API Design'], reportsTo: 'Chief of Staff' },
+        { id: '0002-3', name: 'Elite Solutions', type: 'business', status: 'online', capabilities: ['Analysis', 'Positioning', 'Market Research'], reportsTo: 'Chief of Staff' },
+        { id: '0002-4', name: 'Jumpstart CACFP', type: 'business', status: 'online', capabilities: ['Marketing', 'Content', 'Social Media'], reportsTo: 'Chief of Staff' },
+        { id: '0002-5', name: 'Client Services', type: 'business', status: 'busy', capabilities: ['Node.js', 'Backend', 'Testing'], reportsTo: 'Chief of Staff' },
+        { id: '0002-6', name: 'Licensing', type: 'business', status: 'online', capabilities: ['Stripe', 'Billing', 'Auth'], reportsTo: 'Chief of Staff' },
+        { id: '0002-7', name: 'Education Tech', type: 'business', status: 'online', capabilities: ['Compliance', 'Accessibility', 'WCAG'], reportsTo: 'Chief of Staff' },
+        { id: '0003-1', name: 'Growth Dept', type: 'department', status: 'online', capabilities: ['SEO', 'Copywriting', 'Growth Marketing'], reportsTo: 'Chief of Staff', children: [
+            { id: '0004-5', name: 'Proposal Writer', type: 'specialist', status: 'online', capabilities: ['Writing', 'Editing', 'Proposals'], reportsTo: 'Growth Dept' },
+            { id: '0004-6', name: 'Lead Research', type: 'specialist', status: 'online', capabilities: ['Research', 'Analysis', 'Lead Gen'], reportsTo: 'Growth Dept' },
+            { id: '0004-8', name: 'Brand Messaging', type: 'specialist', status: 'online', capabilities: ['Branding', 'Design', 'Messaging'], reportsTo: 'Growth Dept' }
+        ]},
+        { id: '0003-2', name: 'Product Dept', type: 'department', status: 'online', capabilities: ['Debugging', 'Code Review', 'Architecture'], reportsTo: 'Chief of Staff', children: [
+            { id: '0004-1', name: 'Continuous Cognition', type: 'specialist', status: 'online', capabilities: ['Planning', 'Analysis', 'Strategy'], reportsTo: 'Product Dept' },
+            { id: '0004-2', name: 'macOS Engineer', type: 'specialist', status: 'busy', capabilities: ['Swift', 'Xcode', 'macOS'], reportsTo: 'Product Dept' },
+            { id: '0004-3', name: 'Web Engineer', type: 'specialist', status: 'busy', capabilities: ['Frontend', 'Backend', 'Full Stack'], reportsTo: 'Product Dept' }
+        ]},
+        { id: '0003-3', name: 'Operations', type: 'department', status: 'online', capabilities: ['Deploy', 'Monitoring', 'DevOps'], reportsTo: 'Chief of Staff', children: [
+            { id: '0004-4', name: 'QA/Test Runner', type: 'specialist', status: 'online', capabilities: ['Testing', 'Automation', 'QA'], reportsTo: 'Operations' }
+        ]},
+        { id: '0003-4', name: 'Legal/Finance', type: 'department', status: 'online', capabilities: ['Compliance', 'PCI', 'Security'], reportsTo: 'Chief of Staff', children: [
+            { id: '0004-7', name: 'Compliance Analyzer', type: 'specialist', status: 'online', capabilities: ['GDPR', 'Security', 'Compliance'], reportsTo: 'Legal/Finance' }
+        ]}
+    ]
+};
+
+function renderOrgTree() {
+    var container = document.getElementById('org-tree');
+    if (!container || container.hasChildNodes()) return;
+    container.innerHTML = renderNode(orgData, 0);
+}
+
+function renderNode(node, level) {
+    var hasChildren = node.children && node.children.length > 0;
+    var iconClass = node.type === 'executive' ? 'fa-crown' : node.type === 'business' ? 'fa-building' : node.type === 'department' ? 'fa-sitemap' : 'fa-user';
+    var html = '<div class="org-node" style="margin-left:' + (level * 20) + 'px">';
+    html += '<div class="org-node-content ' + node.type + '" onclick="showAgentDetails(\'' + node.id + '\')" onmouseenter="previewAgentDetails(\'' + node.id + '\')">';
+    if (hasChildren) {
+        html += '<div class="org-expand-btn" onclick="toggleNode(event, this)"><i class="fas fa-chevron-down"></i></div>';
+    } else {
+        html += '<div style="width:20px;"></div>';
+    }
+    html += '<div class="org-node-icon ' + node.type + '"><i class="fas ' + iconClass + '"></i></div>';
+    html += '<div class="org-node-info">';
+    html += '<div class="org-node-name">' + node.name + '</div>';
+    html += '<div class="org-node-meta">' + node.id + ' • ' + node.capabilities.slice(0, 2).join(', ') + (node.capabilities.length > 2 ? ' +' + (node.capabilities.length - 2) : '') + '</div>';
+    html += '</div>';
+    html += '<div class="org-node-status ' + node.status + '"></div>';
+    html += '</div>';
+    if (hasChildren) {
+        html += '<div class="org-children">';
+        node.children.forEach(function(child) {
+            html += renderNode(child, level + 1);
+        });
+        html += '</div>';
+    }
+    html += '</div>';
+    return html;
+}
+
+function toggleNode(event, btn) {
+    event.stopPropagation();
+    var children = btn.closest('.org-node').querySelector('.org-children');
+    if (children) {
+        children.style.display = children.style.display === 'none' ? 'block' : 'none';
+        btn.classList.toggle('collapsed');
+    }
+}
+
+function findAgent(id, node) {
+    if (!node) node = orgData;
+    if (node.id === id) return node;
+    if (node.children) {
+        for (var i = 0; i < node.children.length; i++) {
+            var found = findAgent(id, node.children[i]);
+            if (found) return found;
+        }
+    }
+    return null;
+}
+
+function previewAgentDetails(id) {
+    showAgentDetails(id, true);
+}
+
+function showAgentDetails(id, isPreview) {
+    var agent = findAgent(id);
+    if (!agent) return;
+    var container = document.getElementById('agent-details');
+    var iconClass = agent.type === 'executive' ? 'fa-crown' : agent.type === 'business' ? 'fa-building' : agent.type === 'department' ? 'fa-sitemap' : 'fa-user';
+    var statusColor = agent.status === 'online' ? '#22c55e' : agent.status === 'busy' ? '#f59e0b' : '#64748b';
+    var html = '<div class="agent-detail-card">';
+    html += '<div class="agent-detail-header">';
+    html += '<div class="agent-detail-icon ' + agent.type + '"><i class="fas ' + iconClass + '"></i></div>';
+    html += '<div>';
+    html += '<div class="agent-detail-title">' + agent.name + '</div>';
+    html += '<div class="agent-detail-subtitle">' + agent.id + ' • ' + agent.type.charAt(0).toUpperCase() + agent.type.slice(1) + '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="agent-detail-section">';
+    html += '<div class="agent-detail-label">Status</div>';
+    html += '<div class="agent-detail-value" style="color:' + statusColor + '"><i class="fas fa-circle text-xs mr-2"></i>' + agent.status.charAt(0).toUpperCase() + agent.status.slice(1) + '</div>';
+    html += '</div>';
+    html += '<div class="agent-detail-section">';
+    html += '<div class="agent-detail-label">Reports To</div>';
+    html += '<div class="agent-detail-value">' + (agent.reportsTo || 'N/A (Top Level)') + '</div>';
+    html += '</div>';
+    html += '<div class="agent-detail-section">';
+    html += '<div class="agent-detail-label">Capabilities</div>';
+    html += '<div style="margin-top:8px;">';
+    agent.capabilities.forEach(function(cap) {
+        html += '<span class="agent-capability-tag">' + cap + '</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+    if (agent.children && agent.children.length > 0) {
+        html += '<div class="agent-detail-section">';
+        html += '<div class="agent-detail-label">Direct Reports (' + agent.children.length + ')</div>';
+        html += '<div class="agent-detail-value">' + agent.children.map(function(c) { return c.name; }).join(', ') + '</div>';
+        html += '</div>';
+    }
+    html += '</div>';
+    container.innerHTML = html;
 }
 </script>
 </body>
